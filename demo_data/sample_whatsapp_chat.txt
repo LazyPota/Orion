@@ -1,0 +1,8 @@
+[10:14 AM, 10/24/2026] Derrian: Hey team, just pushed the latest FastAPI endpoints for the Project ORION backend. Everything is running on port 8765.
+[10:16 AM, 10/24/2026] Muhammad Rafli Putra: Awesome work Derrian! How are the VLM routing and OpenRouter nemotron integration looking?
+[10:18 AM, 10/24/2026] Derrian: The multimodal prompt router is working smoothly. It handles both scraped text from the WhatsApp chat container and the base64 viewport screenshot with zero latency spikes.
+[10:21 AM, 10/24/2026] Derrian: Also verified the J.A.R.V.I.S. voice synthesis using edge-tts. RyanNeural sounds very crisp and natural.
+[10:25 AM, 10/24/2026] Derrian: Action item for you Rafli: please review Slide 9 for the presentation before 8:00 PM tonight. We need to align on the live stage demo flow.
+[10:28 AM, 10/24/2026] Derrian: Also make sure the Chromium persistent session is scanned so we don't have to scan the QR code live in front of the audience.
+[10:30 AM, 10/24/2026] Muhammad Rafli Putra: Understood. I'll test the Wispr HUD pill and verify the stage fallback mode just in case Wi-Fi acts up.
+[10:32 AM, 10/24/2026] Derrian: Perfect. Let's do a dry run at 3:00 PM. See you then!

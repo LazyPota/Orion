@@ -1,0 +1,31 @@
+# Project ORION (S.T.A.R.K. MVP) Dependencies
+# Python 3.11+
+
+# Core Backend & Networking
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+httpx>=0.27.0
+pydantic>=2.6.0
+pydantic-settings>=2.2.0
+python-dotenv>=1.0.0
+
+# Desktop UI & OS Integration
+PyQt6>=6.6.0
+pynput>=1.7.6
+pyperclip>=1.8.2
+mss>=9.0.1
+Pillow>=10.0.0
+
+# Audio Capture & Processing
+sounddevice>=0.4.6
+numpy>=1.24.0
+SpeechRecognition>=3.14.0
+faster-whisper>=1.0.0
+
+# J.A.R.V.I.S. Neural Voice Engine & Playback
+edge-tts>=6.1.10
+pygame-ce>=2.4.0
+pyttsx3>=2.90
+
+# Code Verification & ACI Tools
+flake8>=7.0.0

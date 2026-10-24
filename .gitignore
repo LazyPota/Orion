@@ -1,0 +1,74 @@
+# ==============================================================================
+# Project ORION (Group S.T.A.R.K.) - Git Ignore
+# ==============================================================================
+
+# 1. Environment Variables & API Keys (CRITICAL: Never commit secrets)
+.env
+.env.*
+!.env.example
+*.env
+
+# 2. WhatsApp Web Browser Session & Cache (CRITICAL: Contains tokens & cookies)
+whatsapp_session/
+**/whatsapp_session/
+.cache/
+ms-playwright/
+
+# 3. Auto-Generated WhatsApp Intelligence Reports
+reports/*.md
+!reports/.gitkeep
+
+# 4. Python Compilation & Bytecode Caches
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 5. Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# 6. Audio Cache & Temporary Media Recordings
+*.wav
+*.mp3
+*orion_audio/
+*orion_tts/
+
+# 7. Testing, Coverage & Linters
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+*.log
+
+# 8. OS & Editor Artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo

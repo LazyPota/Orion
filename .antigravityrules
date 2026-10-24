@@ -1,0 +1,28 @@
+# Project ORION (S.T.A.R.K. MVP) — Antigravity Workspace Rules
+
+## 1. Architectural Identity
+- You are building **Project ORION**, an OS-wide, voice-activated Agent-Computer Interface (ACI) with a Wispr Flow-style floating HUD overlay.
+- Never build a traditional web-browser chatbot. The UI must be a frameless, always-on-top desktop pill overlay (`PyQt6`) that never steals focus from the user's active window unless expanded.
+- The backend is a local `FastAPI` server (`127.0.0.1:8765`) communicating with OpenRouter (`https://openrouter.ai/api/v1/chat/completions`).
+
+## 2. LLM & Multimodal VLM Conventions
+- Default model in `.env`: `OPENROUTER_MODEL="nvidia/nemotron-3.5-super-vl:free"` (with configurable fallback to any OpenRouter VLM).
+- Inference temperature MUST default to `0.0` for deterministic agentic action selection.
+- Because free-tier OpenRouter VLMs may output tool calls either as native OpenAI `tool_calls` OR as structured JSON inside markdown blocks, ALWAYS implement a resilient Dual Action Parser (`parse_agent_response()`) that extracts the JSON `{ "thought": "...", "action": "...", "args": {...}, "summary_for_user": "...", "spoken_response": "..." }` from either format without crashing.
+- Always compress screenshots (`mss` + `Pillow`) to a maximum dimension of `1280px` and JPEG quality `75` before Base64 encoding to prevent latency spikes.
+
+## 3. Agent-Computer Interface (ACI) Guardrails
+- Never expose raw, unrestricted `bash` execution to the LLM. Only expose deterministic ACI tools:
+  1. `open_file(path, line_start=1)`: Returns at most 100 lines with prepended line numbers (`1: ...`), file path, and total lines.
+  2. `edit_lines(path, start_line, end_line, replacement_text)`: Replaces specified lines and IMMEDIATELY runs `flake8 --isolated --select=F821,F822,F831,E111,E112,E113,E999,E902` on `.py` files.
+  3. `search_workspace(query, path=".")`: Fast regex search returning file paths and line numbers.
+  4. `type_or_paste_text(text)`: Copies synthesized output to the OS clipboard and optionally simulates paste into the active window (Wispr dictation/synthesis mode).
+  5. `open_web_url(url_or_query)`: Opens documentation or search results in the default OS browser.
+  6. `write_markdown_note(filename, content)`: Saves research summaries or study notes locally.
+- **Verification Loop Rule:** If `edit_lines` triggers a `flake8` syntax/indentation error, revert the file to its pre-edit state and automatically feed the error message, attempted edit, and original lines back to the LLM for up to 2 self-correction retries before notifying the user.
+- **History Truncation:** Collapse environment observations older than the last 5 turns into a single-line summary.
+
+## 4. Code Quality & Concurrency
+- Use Python 3.11+, strict type hints, and `Pydantic v2` models for all payloads.
+- Never block the `PyQt6` UI main thread with audio recording, screenshot capture, or HTTP requests; use `QThread` / async workers.
+- Keep modules strictly separated: `ui/`, `trigger/`, `backend/`, `aci/`, `voice/`, and `config.py`.
